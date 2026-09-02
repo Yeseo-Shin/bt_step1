@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="lavender">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>학교 쉬는 시간 알람 & 학급 안내판</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏰</text></svg>">
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ================= 1. 상단 헤더 바 ================= -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="class-badge" id="class-title-badge">
+        <span>🏫</span> <span id="class-name-display">즐거운 수업</span>
+      </div>
+      <div class="period-tag" id="period-tag-display">1차시 쉬는시간</div>
+    </div>
+
+    <div class="header-center">
+      <div class="live-date" id="live-date">2026년 8월 29일 토요일</div>
+      <div class="live-clock-badge">
+        <span class="clock-icon">⏰</span>
+        <span class="live-clock" id="live-clock">10:20:00</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button class="icon-btn" id="btn-sound-toggle" title="소리 켜기/끄기">
+        <span id="sound-icon">🔔</span> 소리 켜짐
+      </button>
+      <button class="icon-btn" id="btn-fullscreen" title="전체화면 전환 (F11)">
+        <span>⛶</span> 전체화면
+      </button>
+      <button class="icon-btn primary-btn" id="btn-open-settings" title="선생님 맞춤 설정">
+        <span>⚙️</span> 교실 설정
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= 2. 메인 화면 레이아웃 ================= -->
+  <main class="main-layout">
+
+    <!-- [좌측 영역]: 쉬는 시간 타이머 (초3 맞춤 컬러풀 패턴 & 무지개 구름 & 귀여운 토끼와 강아지) -->
+    <section class="cute-card timer-section" id="timer-card">
+      <!-- 🎨 초등학교 3학년 맞춤 컬러풀 패턴 배경 레이어 -->
+      <div class="timer-colorful-pattern"></div>
+
+      <div class="cute-card-header" style="width: 100%;">
+        <div class="cute-card-title">
+          <span>⏳</span> 쉬는 시간 타이머
+        </div>
+        <div style="display: flex; gap: 6px; flex-shrink: 0;">
+          <button class="chip-btn" id="quick-set-5" title="5분으로 설정">5분</button>
+          <button class="chip-btn" id="quick-set-10" title="10분으로 설정">10분</button>
+          <button class="chip-btn" id="quick-set-15" title="15분으로 설정">15분</button>
+          <button class="chip-btn" id="quick-set-20" title="20분으로 설정">20분</button>
+        </div>
+      </div>
+
+      <!-- 초등학교 3학년 맞춤형 화려하고 귀여운 타이머 무대 (무지개, 구름, 별, 풍선) -->
+      <div class="timer-visual-wrapper">
+        
+        <!-- 🌈 타이머 원 뒷배경: 파스텔 무지개, 몽실 구름, 별똥별, 요정 방울 -->
+        <div class="timer-backdrop-scene">
+          <div class="scene-glow-aura"></div>
+          <div class="scene-rainbow"></div>
+
+          <div class="scene-cloud cloud-left">☁️</div>
+          <div class="scene-cloud cloud-right">☁️</div>
+          <div class="scene-cloud cloud-bottom-left">☁️</div>
+          <div class="scene-cloud cloud-bottom-right">☁️</div>
+
+          <div class="scene-star star-1">⭐</div>
+          <div class="scene-star star-2">✨</div>
+          <div class="scene-star star-3">🌟</div>
+          <div class="scene-star star-4">✨</div>
+          <div class="scene-planet">🪐</div>
+          <div class="scene-balloon">🎈</div>
+          <div class="scene-sparkle-dot dot-1"></div>
+          <div class="scene-sparkle-dot dot-2"></div>
+          <div class="scene-sparkle-dot dot-3"></div>
+        </div>
+
+        <!-- 대형 두꺼운 원형 프로그레스 게이지 SVG -->
+        <svg class="timer-svg" viewBox="0 0 320 320">
+          <defs>
+            <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#EC4899" />
+              <stop offset="30%" stop-color="#A855F7" />
+              <stop offset="70%" stop-color="#6366F1" />
+              <stop offset="100%" stop-color="#38BDF8" />
+            </linearGradient>
+            <!-- 강아지 얼굴 후광 필터 -->
+            <filter id="puppyGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.3)" />
+            </filter>
+          </defs>
+          <circle class="timer-circle-bg" cx="160" cy="160" r="136"></circle>
+          <circle class="timer-circle-progress" id="timer-progress-ring" cx="160" cy="160" r="136" transform="rotate(-90 160 160)"></circle>
+          
+          <!-- 🐶 원형 게이지 끝에 딱 붙어있는 사랑스러운 강아지 얼굴 마커 (Puppy Face) -->
+          <g id="timer-chasing-puppy" class="puppy-face-marker" filter="url(#puppyGlow)" transform="translate(160, 24)">
+            <!-- 외곽 흰색 테두리 받침 (시인성 극대화) -->
+            <circle cx="0" cy="0" r="19" fill="#FFFFFF" />
+            
+            <!-- 강아지 귀 (좌/우 펄럭이는 갈색 귀) -->
+            <ellipse class="puppy-face-ear ear-left" cx="-13" cy="-7" rx="5.5" ry="11" fill="#D97706" stroke="#B45309" stroke-width="1.5" transform="rotate(-18 -13 -7)" />
+            <ellipse class="puppy-face-ear ear-right" cx="13" cy="-7" rx="5.5" ry="11" fill="#D97706" stroke="#B45309" stroke-width="1.5" transform="rotate(18 13 -7)" />
+
+            <!-- 통통하고 귀여운 황금 강아지 얼굴 -->
+            <circle cx="0" cy="0" r="16.5" fill="#FBBF24" stroke="#F59E0B" stroke-width="1.8" />
+
+            <!-- 뽀송한 흰색 주둥이 -->
+            <ellipse cx="0" cy="4" rx="8.5" ry="6" fill="#FFFBEB" />
+
+            <!-- 초롱초롱한 큰 눈망울 & 반짝이 하이라이트 -->
+            <circle cx="-5.5" cy="-2.5" r="2.8" fill="#1E293B" />
+            <circle cx="-6.5" cy="-3.5" r="1" fill="#FFFFFF" />
+            <circle cx="-4.5" cy="-1.5" r="0.5" fill="#FFFFFF" />
+
+            <circle cx="5.5" cy="-2.5" r="2.8" fill="#1E293B" />
+            <circle cx="4.5" cy="-3.5" r="1" fill="#FFFFFF" />
+            <circle cx="6.5" cy="-1.5" r="0.5" fill="#FFFFFF" />
+
+            <!-- 사랑스러운 핑크 볼터치 -->
+            <circle cx="-10.5" cy="3" r="3" fill="#FDA4AF" opacity="0.9" />
+            <circle cx="10.5" cy="3" r="3" fill="#FDA4AF" opacity="0.9" />
+
+            <!-- 까만 콩 단추 코 -->
+            <ellipse cx="0" cy="1.5" rx="3" ry="2" fill="#1E293B" />
+
+            <!-- 웃는 입 & 낼름 내민 핑크 혀 -->
+            <path d="M -3.5 4.8 Q 0 7.5 0 4.8 Q 0 7.5 3.5 4.8" fill="none" stroke="#451A03" stroke-width="1.5" stroke-linecap="round" />
+            <ellipse cx="0" cy="7" rx="2.2" ry="1.8" fill="#F43F5E" />
+          </g>
+        </svg>
+
+        <!-- 원 안쪽 컨텐츠: 구름 위 귀여운 아기 토끼 + 시간 표시 -->
+        <div class="timer-inner-content">
+          <div class="timer-bunny-wrapper" id="timer-bunny" title="귀여운 쉬는시간 토끼 🐰">
+            <svg class="bunny-svg" viewBox="0 0 110 95" width="76" height="66">
+              <ellipse cx="55" cy="80" rx="42" ry="12" fill="#F3EEFF" stroke="#DDD6FE" stroke-width="2" />
+              <circle cx="35" cy="76" r="14" fill="#FFFFFF" />
+              <circle cx="55" cy="73" r="16" fill="#FFFFFF" />
+              <circle cx="75" cy="76" r="14" fill="#FFFFFF" />
+
+              <ellipse cx="40" cy="22" rx="9" ry="22" fill="#FFFFFF" stroke="#C4B5FD" stroke-width="2.5" transform="rotate(-12 40 22)" />
+              <ellipse cx="40" cy="22" rx="5" ry="15" fill="#F472B6" opacity="0.7" transform="rotate(-12 40 22)" />
+              <ellipse cx="70" cy="22" rx="9" ry="22" fill="#FFFFFF" stroke="#C4B5FD" stroke-width="2.5" transform="rotate(12 70 22)" />
+              <ellipse cx="70" cy="22" rx="5" ry="15" fill="#F472B6" opacity="0.7" transform="rotate(12 70 22)" />
+              
+              <ellipse cx="55" cy="58" rx="31" ry="25" fill="#FFFFFF" stroke="#C4B5FD" stroke-width="2.5" />
+              
+              <circle cx="43" cy="54" r="4.5" fill="#312E81" />
+              <circle cx="41.5" cy="52" r="1.8" fill="#FFFFFF" />
+              <circle cx="44.5" cy="55.5" r="0.9" fill="#FFFFFF" />
+
+              <circle cx="67" cy="54" r="4.5" fill="#312E81" />
+              <circle cx="65.5" cy="52" r="1.8" fill="#FFFFFF" />
+              <circle cx="68.5" cy="55.5" r="0.9" fill="#FFFFFF" />
+              
+              <ellipse cx="36" cy="62" rx="5.5" ry="3" fill="#FDA4AF" opacity="0.85" />
+              <ellipse cx="74" cy="62" rx="5.5" ry="3" fill="#FDA4AF" opacity="0.85" />
+              
+              <polygon points="55,59 52,55.5 58,55.5" fill="#F43F5E" />
+              <path d="M 50 62 Q 55 66 55 62 Q 55 66 60 62" fill="none" stroke="#4338CA" stroke-width="2" stroke-linecap="round" />
+
+              <ellipse cx="44" cy="74" rx="5.5" ry="4" fill="#FFFFFF" stroke="#C4B5FD" stroke-width="1.8" />
+              <ellipse cx="66" cy="74" rx="5.5" ry="4" fill="#FFFFFF" stroke="#C4B5FD" stroke-width="1.8" />
+            </svg>
+          </div>
+
+          <div class="timer-status-badge" id="timer-status-badge">쉬는 시간 준비 ✨</div>
+          <div class="timer-digits" id="timer-display">10:00</div>
+          <div class="timer-total-sub" id="timer-total-sub">총 설정: 10분</div>
+        </div>
+      </div>
+
+      <!-- 타이머 제어 버튼 -->
+      <div class="timer-controls">
+        <button class="big-btn btn-start" id="btn-timer-toggle">
+          <span id="btn-toggle-icon">▶</span> <span id="btn-toggle-label">시작하기</span>
+        </button>
+        <button class="big-btn btn-reset" id="btn-timer-reset">
+          <span>🔄</span> 다시 시작
+        </button>
+      </div>
+
+      <!-- 빠른 시간 조절 칩 -->
+      <div class="quick-time-chips">
+        <button class="chip-btn" id="btn-add-1m">➕ 1분</button>
+        <button class="chip-btn" id="btn-add-3m">➕ 3분</button>
+        <button class="chip-btn" id="btn-add-5m">➕ 5분</button>
+        <button class="chip-btn" id="btn-sub-1m">➖ 1분</button>
+      </div>
+    </section>
+
+    <!-- [우측 영역]: 공지사항 보드 & 대형 미디어/영상 영역 -->
+    <div class="right-column no-media" id="right-column-container">
+
+      <!-- 1. 오늘의 안내 / 학급 알림판 (미디어가 없을 땐 전체 확장) -->
+      <section class="cute-card notice-card">
+        <div class="cute-card-header">
+          <div class="cute-card-title">
+            <span>📢</span> 학급 알림판
+          </div>
+          <button class="icon-btn" id="btn-edit-notice-quick" style="padding: 3px 8px; font-size: 0.85rem;">
+            ✏️ 공지 수정
+          </button>
+        </div>
+
+        <div class="notice-list" id="notice-list-container">
+          <div class="notice-item">
+            <span class="notice-pin-icon">💧</span>
+            <div class="notice-text-content">
+              <span class="notice-tag">쉬는 시간 수칙</span>
+              <div class="notice-main-text">화장실 다녀오기, 물 마시기</div>
+            </div>
+          </div>
+          <div class="notice-item">
+            <span class="notice-pin-icon">🏃</span>
+            <div class="notice-text-content">
+              <span class="notice-tag">안전 약속</span>
+              <div class="notice-main-text">뛰지 않기</div>
+            </div>
+          </div>
+          <div class="notice-item">
+            <span class="notice-pin-icon">🤝</span>
+            <div class="notice-text-content">
+              <span class="notice-tag">바른 생활</span>
+              <div class="notice-main-text">매너있게 말하고 행동하기</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. 대형 교실 미디어 카드 (사진 / 영상 등록 시에만 표시) -->
+      <section class="cute-card media-card" id="media-card-box">
+        <div class="cute-card-header">
+          <div class="cute-card-title">
+            <span>✨</span> 교실 미디어 갤러리
+          </div>
+          <div class="media-tab-bar">
+            <button class="media-tab active" data-tab="image">🖼️ 사진 / 작품</button>
+            <button class="media-tab" data-tab="video">🎬 영상 / 유튜브</button>
+          </div>
+        </div>
+
+        <!-- 대형 미디어 표시 컨테이너 -->
+        <div class="media-content-container" id="media-content-container">
+
+          <!-- 1) 대형 이미지 뷰 -->
+          <div class="image-view" id="view-image">
+            <img id="custom-image-display" src="" alt="교실 이미지">
+          </div>
+
+          <!-- 2) 대형 비디오/유튜브 뷰 -->
+          <div class="video-view" id="view-video" style="display: none;">
+            <div id="video-frame-container" style="width: 100%; height: 100%;"></div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ================= 3. 하단 푸터 바 ================= -->
+  <footer class="app-footer">
+    <div class="footer-left-space"></div>
+    <div class="footer-actions">
+      <!-- 🎯 룰렛 뽑기 버튼 -->
+      <button class="icon-btn primary-btn" id="btn-roulette-open" title="화면 가득 룰렛 돌리기">
+        <span>🎯</span> 룰렛 뽑기
+      </button>
+      <!-- 🪜 사다리 타기 버튼 -->
+      <button class="icon-btn" id="btn-ladder-game" title="동물 사다리 타기 게임">
+        <span>🪜</span> 사다리 타기
+      </button>
+    </div>
+  </footer>
+
+  <!-- ================= 4. 대형 화면 가득 룰렛 뽑기 모달 ================= -->
+  <div class="modal-overlay" id="roulette-modal">
+    <div class="roulette-modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>🎯</span> 대형 룰렛 뽑기
+        </div>
+        <button class="modal-close-btn" id="btn-roulette-close" title="닫기">&times;</button>
+      </div>
+
+      <div class="roulette-modal-body">
+        <div class="roulette-left-stage">
+          <div class="roulette-wheel-wrapper" id="roulette-wheel-wrapper">
+            <div class="roulette-pointer">▼</div>
+            <canvas id="roulette-canvas"></canvas>
+            <button type="button" class="roulette-center-btn" id="roulette-center-btn" title="룰렛 돌리기!">
+              <span>START</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="roulette-right-panel">
+          <div class="roulette-panel-header">
+            <span class="panel-title">📝 룰렛 항목 관리</span>
+            <span class="badge-count" id="roulette-item-count">12개 항목</span>
+          </div>
+
+          <div class="roulette-presets">
+            <button type="button" class="chip-btn" id="preset-nums-25">👥 학생 번호 (1~25)</button>
+            <button type="button" class="chip-btn" id="preset-cleaning">🧹 청소 구역</button>
+            <button type="button" class="chip-btn" id="preset-snack">🍬 간식/행운</button>
+          </div>
+
+          <div class="roulette-input-box">
+            <label for="roulette-items-input" style="font-size: 0.9rem; color: var(--text-muted);">
+              💡 한 줄에 하나씩 이름을 입력하거나 수정하세요:
+            </label>
+            <textarea id="roulette-items-input" class="form-control roulette-textarea" placeholder="항목을 입력하세요..."></textarea>
+          </div>
+
+          <div class="roulette-action-toolbar">
+            <button type="button" class="icon-btn" id="btn-roulette-shuffle" title="항목 순서를 무작위로 섞습니다">
+              <span>🔀</span> 랜덤 섞기
+            </button>
+            <button type="button" class="icon-btn" id="btn-roulette-apply-items" title="입력한 항목을 룰렛판에 적용합니다">
+              <span>✅</span> 항목 적용
+            </button>
+            <button type="button" class="icon-btn" id="btn-roulette-clear" title="기본값으로 초기화">
+              <span>🗑️</span> 비우기
+            </button>
+          </div>
+
+          <button type="button" class="big-btn btn-start roulette-spin-big-btn" id="btn-roulette-spin">
+            <span>🚀</span> 룰렛 돌리기!
+          </button>
+        </div>
+      </div>
+
+      <div class="roulette-winner-popup" id="roulette-winner-popup">
+        <div class="winner-popup-content">
+          <div class="winner-trophy-icon">🏆</div>
+          <div class="winner-sub-title">🎉 당첨을 축하합니다! 🎉</div>
+          <div class="winner-result-text" id="winner-result-text">1번 학생</div>
+          <div class="winner-btn-group">
+            <button type="button" class="big-btn btn-reset" id="btn-winner-remove" title="당첨된 항목을 룰렛에서 제거하고 계속합니다">
+              <span>🗑️</span> 이 항목 제거하기
+            </button>
+            <button type="button" class="big-btn btn-start" id="btn-winner-close">
+              <span>✨</span> 확인
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 5. 사다리 타기 모달 창 ================= -->
+  <div class="modal-overlay" id="ladder-modal">
+    <div class="ladder-modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>🪜</span> 동물 사다리 타기
+        </div>
+        <button class="modal-close-btn" id="btn-ladder-close" title="닫기">&times;</button>
+      </div>
+
+      <div class="ladder-toolbar">
+        <div class="ladder-count-control">
+          <span>🐾 참여 인원 수:</span>
+          <button type="button" class="chip-btn" id="btn-ladder-minus" style="padding: 2px 10px; font-size: 1.2rem;">−</button>
+          <input type="number" id="ladder-count-input" class="form-control" value="6" min="2" max="25" style="width: 65px; text-align: center; font-weight: 700; padding: 4px 8px;">
+          <button type="button" class="chip-btn" id="btn-ladder-plus" style="padding: 2px 10px; font-size: 1.2rem;">+</button>
+          <span style="font-size: 0.9rem; color: var(--text-muted); margin-left: 4px;">(2명 ~ 25명)</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="icon-btn" id="btn-ladder-shuffle">
+            <span>🔄</span> 사다리 새로 섞기
+          </button>
+          <button type="button" class="icon-btn primary-btn" id="btn-ladder-reveal-all">
+            <span>✨</span> 전체 결과 보기
+          </button>
+        </div>
+      </div>
+
+      <div class="ladder-board-container" id="ladder-board-container">
+        <div class="ladder-top-row" id="ladder-top-row"></div>
+        <div class="ladder-canvas-wrap" id="ladder-canvas-wrap">
+          <canvas id="ladder-canvas"></canvas>
+        </div>
+        <div class="ladder-bottom-row" id="ladder-bottom-row"></div>
+      </div>
+
+      <div class="ladder-summary-panel">
+        <div class="ladder-summary-title">
+          <span>📊</span> 매칭 결과 요약:
+        </div>
+        <div class="ladder-summary-list" id="ladder-summary-list">
+          <span style="color:#94A3B8; font-size:0.95rem;">동물을 클릭하면 매칭 결과가 여기에 차례대로 기록됩니다 🐾</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 6. 선생님 맞춤 설정 모달 ================= -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>⚙️</span> 교실 및 쉬는시간 설정
+        </div>
+        <button class="modal-close-btn" id="btn-modal-close" title="닫기">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="settings-nav">
+          <button class="settings-nav-btn active" data-target="tab-timer">⏰ 시간 설정</button>
+          <button class="settings-nav-btn" data-target="tab-notice">📢 공지사항</button>
+          <button class="settings-nav-btn" data-target="tab-media">🖼️ 사진/영상</button>
+          <button class="settings-nav-btn" data-target="tab-theme">🎨 테마 & 소리</button>
+        </div>
+
+        <!-- 탭 1: 시간 설정 -->
+        <div class="settings-tab-pane active" id="tab-timer">
+          <div class="form-group">
+            <label>🏫 상단 제목</label>
+            <input type="text" id="setting-class-name" class="form-control" placeholder="예: 즐거운 수업">
+          </div>
+          <div class="form-group">
+            <label>🎈 교시 / 차시 태그</label>
+            <input type="text" id="setting-period-tag" class="form-control" placeholder="예: 1차시 쉬는시간">
+          </div>
+          <div class="form-group">
+            <label>⏳ 기본 쉬는 시간 (분)</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <input type="number" id="setting-timer-minutes" class="form-control" min="1" max="60" value="10" style="width: 100px;">
+              <span style="font-size: 1.05rem; font-weight: 700;">분</span>
+              <div style="display: flex; gap: 6px; margin-left: auto;">
+                <button type="button" class="chip-btn set-default-min" data-min="5">5분</button>
+                <button type="button" class="chip-btn set-default-min" data-min="10">10분</button>
+                <button type="button" class="chip-btn set-default-min" data-min="15">15분</button>
+                <button type="button" class="chip-btn set-default-min" data-min="20">20분</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="setting-1min-warning" checked style="width: 18px; height: 18px;">
+              <span>🔔 쉬는 시간 1분 전 예고음 & 마지막 1분 짹깍짹깍 초침 소리</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 탭 2: 공지사항 관리 -->
+        <div class="settings-tab-pane" id="tab-notice">
+          <div class="form-group">
+            <label>📝 알림 1 (상단 - 기본 수칙)</label>
+            <input type="text" id="setting-notice-1" class="form-control" placeholder="화장실 다녀오기, 물 마시기">
+          </div>
+          <div class="form-group">
+            <label>📝 알림 2 (중간 - 안전 약속)</label>
+            <input type="text" id="setting-notice-2" class="form-control" placeholder="뛰지 않기">
+          </div>
+          <div class="form-group">
+            <label>📝 알림 3 (하단 - 바른 태도)</label>
+            <input type="text" id="setting-notice-3" class="form-control" placeholder="매너있게 말하고 행동하기">
+          </div>
+          <div class="form-group">
+            <label>💡 빠른 공지 프리셋 불러오기</label>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <button type="button" class="chip-btn notice-preset-btn" data-type="default">⭐ 기본 수칙</button>
+              <button type="button" class="chip-btn notice-preset-btn" data-type="art">🎨 미술 시간</button>
+              <button type="button" class="chip-btn notice-preset-btn" data-type="pe">🏃 체육 시간</button>
+              <button type="button" class="chip-btn notice-preset-btn" data-type="lunch">🍱 점심 시간</button>
+              <button type="button" class="chip-btn notice-preset-btn" data-type="clean">🧹 청소 시간</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 탭 3: 사진 / 영상 미디어 설정 -->
+        <div class="settings-tab-pane" id="tab-media">
+          <div class="form-group">
+            <label>📸 우리 반 사진 올리기</label>
+            <input type="file" id="setting-image-file" accept="image/*" class="form-control">
+            <small style="color: var(--text-muted); margin-top: 2px;">또는 이미지 웹 링크(URL)를 입력하세요:</small>
+            <input type="url" id="setting-image-url" class="form-control" placeholder="https://example.com/photo.jpg" style="margin-top: 4px;">
+          </div>
+          <div class="form-group" style="margin-top: 8px;">
+            <label>🎬 영상 / 유튜브 링크</label>
+            <input type="url" id="setting-video-url" class="form-control" placeholder="https://www.youtube.com/watch?v=... 또는 mp4 링크">
+            <small style="color: var(--text-muted);">쉬는시간 스트레칭 체조나 힐링 음악 영상을 등록해두세요.</small>
+          </div>
+          <div style="margin-top: 10px; padding: 10px; background: #F8FAFC; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.9rem; color: var(--text-muted);">💡 미디어를 등록하면 교실 화면에 대형 갤러리가 나타나며, 비워두면 알림판이 넓게 표시됩니다.</span>
+            <button type="button" class="chip-btn" id="btn-clear-media" style="color: var(--c-red); border-color: var(--c-red);">🗑️ 미디어 비우기</button>
+          </div>
+        </div>
+
+        <!-- 탭 4: 테마 및 소리 설정 -->
+        <div class="settings-tab-pane" id="tab-theme">
+          <div class="form-group">
+            <label>🎨 화면 테마 선택</label>
+            <div class="theme-grid">
+              <div class="theme-card-option selected" data-theme-val="lavender">
+                <span>💜</span> 연보라 & 블루 (기본)
+              </div>
+              <div class="theme-card-option" data-theme-val="dark">
+                <span>🌌</span> 네온 오로라 (다크)
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 8px;">
+            <label>🔔 종료 종소리 종류 (교실 고출력 사운드)</label>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <select id="setting-sound-type" class="form-control" style="flex: 1;">
+                <option value="school_bell">🏫 쨍하고 큰 학교 종소리 (딩동댕동)</option>
+                <option value="xylophone">🎶 맑고 튀는 실로폰 멜로디</option>
+                <option value="fanfare">🎺 신나는 승리 팡파레</option>
+                <option value="cuckoo">🕊️ 쨍한 뻐꾸기 시계</option>
+                <option value="dingdong">🔔 시원하게 울리는 딩동 벨소리</option>
+              </select>
+              <button type="button" class="icon-btn" id="btn-preview-sound" title="소리 들어보기">
+                ▶ 미리듣기
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>🔊 알림 볼륨 (증폭 지원)</label>
+            <input type="range" id="setting-volume" min="0" max="1" step="0.05" value="1.0" style="width: 100%; accent-color: var(--c-lavender);">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="icon-btn" id="btn-modal-cancel">취소</button>
+        <button class="icon-btn primary-btn" id="btn-save-settings">💾 설정 저장하기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sound.js"></script>
+  <script src="confetti.js"></script>
+  <script src="ladder.js"></script>
+  <script src="roulette.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
