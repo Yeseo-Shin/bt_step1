@@ -324,21 +324,21 @@ body {
   overflow: hidden;
 }
 
-/* 🎨 초3 맞춤 컬러풀 패턴 배경 (반짝이, 캔디, 별, 도트, 지그재그) */
+/* 🎨 초3 맞춤 컬러풀 패턴 배경 (사이즈 50% 확대: 105px) */
 .timer-colorful-pattern {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%23F472B6' opacity='0.45'/%3E%3Ccircle cx='48' cy='20' r='4' fill='%2338BDF8' opacity='0.45'/%3E%3Ccircle cx='62' cy='58' r='3.5' fill='%2334D399' opacity='0.5'/%3E%3Ccircle cx='18' cy='52' r='4.5' fill='%23FBBF24' opacity='0.45'/%3E%3Cpath d='M35 6l2 4.5 4.5 2-4.5 2-2 4.5-2-4.5-4.5-2 4.5-2z' fill='%23A78BFA' opacity='0.5'/%3E%3Cpath d='M58 35l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z' fill='%23FB7185' opacity='0.45'/%3E%3Cpath d='M12 30l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5z' fill='%2360A5FA' opacity='0.45'/%3E%3Ccircle cx='35' cy='60' r='4' stroke='%23C084FC' stroke-width='2' opacity='0.4'/%3E%3Ccircle cx='64' cy='10' r='3.5' stroke='%23FB923C' stroke-width='2' opacity='0.4'/%3E%3Cpath d='M20 14q3 3 6 0t6 0' stroke='%23F472B6' stroke-width='2' stroke-linecap='round' opacity='0.45'/%3E%3Cpath d='M44 48q3 3 6 0t6 0' stroke='%2334D399' stroke-width='2' stroke-linecap='round' opacity='0.45'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 70px 70px;
+  background-size: 105px 105px;
   opacity: 0.9;
 }
 
 .timer-visual-wrapper {
   position: relative;
   flex: 1 1 auto;
-  max-height: 50vh;
+  max-height: 55vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -362,11 +362,11 @@ body {
   justify-content: center;
 }
 
-/* 1) 부드러운 오로라 후광 */
+/* 1) 부드러운 오로라 후광 (20% 확대) */
 .scene-glow-aura {
   position: absolute;
-  width: 255px;
-  height: 255px;
+  width: 306px;
+  height: 306px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(196, 181, 253, 0.5) 0%, rgba(186, 230, 253, 0.4) 50%, rgba(254, 205, 211, 0.2) 75%, transparent 100%);
   filter: blur(14px);
@@ -378,26 +378,7 @@ body {
   100% { transform: scale(1.08); opacity: 0.95; }
 }
 
-/* 2) 상단 파스텔 무지개 아치 */
-.scene-rainbow {
-  position: absolute;
-  top: 6px;
-  width: 210px;
-  height: 105px;
-  border-top-left-radius: 110px;
-  border-top-right-radius: 110px;
-  border: 7px solid transparent;
-  border-top-color: rgba(244, 114, 182, 0.8);
-  box-shadow: 
-    0 -5px 0 0 rgba(251, 191, 36, 0.8),
-    0 -10px 0 0 rgba(52, 211, 153, 0.75),
-    0 -15px 0 0 rgba(96, 165, 250, 0.8);
-  transform: rotate(-4deg);
-  opacity: 0.85;
-  filter: drop-shadow(0 3px 6px rgba(139, 92, 246, 0.2));
-}
-
-/* 3) 몽실몽실 푹신한 파스텔 구름들 */
+/* 2) 몽실몽실 푹신한 파스텔 구름들 */
 .scene-cloud {
   position: absolute;
   font-size: 2.2rem;
@@ -497,10 +478,10 @@ body {
   100% { transform: scale(1.3); opacity: 1; }
 }
 
-/* ================= 대형 두꺼운 원형 프로그레스 게이지 ================= */
+/* ================= 대형 두꺼운 원형 프로그레스 게이지 (20% 확대: 336px) ================= */
 .timer-svg {
   height: 100%;
-  max-height: 280px;
+  max-height: 336px;
   aspect-ratio: 1 / 1;
   filter: drop-shadow(0 6px 18px rgba(139, 92, 246, 0.25));
   z-index: 2;
@@ -614,7 +595,7 @@ body {
 }
 
 .timer-digits {
-  font-size: clamp(2.9rem, 5.4vh, 4.2rem);
+  font-size: clamp(3.2rem, 6.0vh, 4.8rem);
   color: var(--text-main);
   line-height: 1;
   letter-spacing: 1px;

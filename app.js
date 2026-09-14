@@ -337,12 +337,40 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.soundEngine) window.soundEngine.playClick();
   }
 
+  function stopMediaPlayback() {
+    if (!el.videoFrameContainer) return;
+    
+    // 1) HTML5 비디오 일시정지
+    const videoEl = el.videoFrameContainer.querySelector('video');
+    if (videoEl) {
+      try {
+        videoEl.pause();
+      } catch (e) {
+        console.warn('Video pause error', e);
+      }
+    }
+
+    // 2) 유튜브 iframe 영상 정지 (YouTube Player API postMessage)
+    const iframeEl = el.videoFrameContainer.querySelector('iframe');
+    if (iframeEl && iframeEl.contentWindow) {
+      try {
+        iframeEl.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        iframeEl.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+      } catch (e) {
+        console.warn('Iframe postMessage error', e);
+      }
+    }
+  }
+
   function finishTimer() {
     pauseTimer();
     state.remainingSeconds = 0;
     updateTimerDisplay();
     el.timerStatusBadge.textContent = '쉬는 시간 끝! 수업 준비 🔔';
     el.btnToggleLabel.textContent = '다시 시작';
+
+    // 쉬는 시간 종료 알람 시 재생 중이던 영상 즉시 멈춤
+    stopMediaPlayback();
 
     if (window.confettiEngine) {
       window.confettiEngine.start(5000);
