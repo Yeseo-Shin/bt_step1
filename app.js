@@ -403,11 +403,23 @@ document.addEventListener('DOMContentLoaded', () => {
       item.className = 'notice-item';
       const icon = icons[idx % icons.length];
 
+      // 쉼표(,)나 줄바꿈(\n)으로 구분된 항목들을 세로 줄(notice-line)로 분리
+      const lines = n.text
+        .split(/,|\n/)
+        .map(l => l.trim())
+        .filter(l => l.length > 0);
+
+      const linesHtml = lines.length > 0 
+        ? lines.map(line => `<div class="notice-line">${escapeHtml(line)}</div>`).join('')
+        : `<div class="notice-line">${escapeHtml(n.text)}</div>`;
+
       item.innerHTML = `
-        <span class="notice-pin-icon">${icon}</span>
-        <div class="notice-text-content">
+        <div class="notice-item-header">
+          <span class="notice-pin-icon">${icon}</span>
           <span class="notice-tag">${escapeHtml(n.tag || '안내')}</span>
-          <div class="notice-main-text">${escapeHtml(n.text)}</div>
+        </div>
+        <div class="notice-body">
+          ${linesHtml}
         </div>
       `;
       el.noticeListContainer.appendChild(item);

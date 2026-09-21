@@ -64,21 +64,22 @@
       <!-- 초등학교 3학년 맞춤형 화려하고 귀여운 타이머 무대 (무지개, 구름, 별, 풍선) -->
       <div class="timer-visual-wrapper">
         
-        <!-- 🌈 타이머 원 뒷배경: 몽실 구름, 별똥별, 요정 방울 -->
+        <!-- 🌿 타이머 원 뒷배경: 싱그러운 잔디밭, 클로버, 나비, 들꽃 무대 -->
         <div class="timer-backdrop-scene">
           <div class="scene-glow-aura"></div>
 
+          <!-- 푸른 하늘 몽실 구름 -->
           <div class="scene-cloud cloud-left">☁️</div>
           <div class="scene-cloud cloud-right">☁️</div>
-          <div class="scene-cloud cloud-bottom-left">☁️</div>
-          <div class="scene-cloud cloud-bottom-right">☁️</div>
 
-          <div class="scene-star star-1">⭐</div>
-          <div class="scene-star star-2">✨</div>
-          <div class="scene-star star-3">🌟</div>
-          <div class="scene-star star-4">✨</div>
-          <div class="scene-planet">🪐</div>
-          <div class="scene-balloon">🎈</div>
+          <!-- 잔디밭 들꽃, 네잎클로버, 나비, 무당벌레 장식 -->
+          <div class="scene-nature nature-clover" title="행운의 네잎클로버">🍀</div>
+          <div class="scene-nature nature-daisy" title="예쁜 데이지">🌼</div>
+          <div class="scene-nature nature-tulip" title="화사한 튤립">🌷</div>
+          <div class="scene-nature nature-butterfly" title="팔랑팔랑 나비">🦋</div>
+          <div class="scene-nature nature-ladybug" title="귀여운 무당벌레">🐞</div>
+          <div class="scene-nature nature-sprout" title="파릇파릇 새싹">🌱</div>
+          
           <div class="scene-sparkle-dot dot-1"></div>
           <div class="scene-sparkle-dot dot-2"></div>
           <div class="scene-sparkle-dot dot-3"></div>
@@ -88,10 +89,10 @@
         <svg class="timer-svg" viewBox="0 0 320 320">
           <defs>
             <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#EC4899" />
-              <stop offset="30%" stop-color="#A855F7" />
-              <stop offset="70%" stop-color="#6366F1" />
-              <stop offset="100%" stop-color="#38BDF8" />
+              <stop offset="0%" stop-color="#10B981" />
+              <stop offset="35%" stop-color="#3B82F6" />
+              <stop offset="70%" stop-color="#8B5CF6" />
+              <stop offset="100%" stop-color="#EC4899" />
             </linearGradient>
             <!-- 강아지 얼굴 후광 필터 -->
             <filter id="puppyGlow" x="-20%" y="-20%" width="140%" height="140%">
@@ -138,14 +139,18 @@
           </g>
         </svg>
 
-        <!-- 원 안쪽 컨텐츠: 구름 위 귀여운 아기 토끼 + 시간 표시 -->
+        <!-- 원 안쪽 컨텐츠: 잔디 언덕 위 귀여운 아기 토끼 + 시간 표시 -->
         <div class="timer-inner-content">
           <div class="timer-bunny-wrapper" id="timer-bunny" title="귀여운 쉬는시간 토끼 🐰">
             <svg class="bunny-svg" viewBox="0 0 110 95" width="76" height="66">
-              <ellipse cx="55" cy="80" rx="42" ry="12" fill="#F3EEFF" stroke="#DDD6FE" stroke-width="2" />
-              <circle cx="35" cy="76" r="14" fill="#FFFFFF" />
-              <circle cx="55" cy="73" r="16" fill="#FFFFFF" />
-              <circle cx="75" cy="76" r="14" fill="#FFFFFF" />
+              <!-- 싱그러운 잔디 언덕 받침 -->
+              <ellipse cx="55" cy="80" rx="42" ry="12" fill="#DCFCE7" stroke="#86EFAC" stroke-width="2" />
+              <circle cx="35" cy="76" r="14" fill="#F0FDF4" />
+              <circle cx="55" cy="73" r="16" fill="#F0FDF4" />
+              <circle cx="75" cy="76" r="14" fill="#F0FDF4" />
+              <!-- 잔디 언덕 위 미니 꽃 -->
+              <circle cx="32" cy="75" r="2.5" fill="#FDE047" />
+              <circle cx="78" cy="75" r="2.5" fill="#F472B6" />
 
               <ellipse cx="40" cy="22" rx="9" ry="22" fill="#FFFFFF" stroke="#C4B5FD" stroke-width="2.5" transform="rotate(-12 40 22)" />
               <ellipse cx="40" cy="22" rx="5" ry="15" fill="#F472B6" opacity="0.7" transform="rotate(-12 40 22)" />
@@ -214,24 +219,31 @@
 
         <div class="notice-list" id="notice-list-container">
           <div class="notice-item">
-            <span class="notice-pin-icon">💧</span>
-            <div class="notice-text-content">
+            <div class="notice-item-header">
+              <span class="notice-pin-icon">💧</span>
               <span class="notice-tag">쉬는 시간 수칙</span>
-              <div class="notice-main-text">화장실 다녀오기, 물 마시기</div>
+            </div>
+            <div class="notice-body">
+              <div class="notice-line">화장실 다녀오기</div>
+              <div class="notice-line">물 마시기</div>
             </div>
           </div>
           <div class="notice-item">
-            <span class="notice-pin-icon">🏃</span>
-            <div class="notice-text-content">
+            <div class="notice-item-header">
+              <span class="notice-pin-icon">🏃</span>
               <span class="notice-tag">안전 약속</span>
-              <div class="notice-main-text">뛰지 않기</div>
+            </div>
+            <div class="notice-body">
+              <div class="notice-line">뛰지 않기</div>
             </div>
           </div>
           <div class="notice-item">
-            <span class="notice-pin-icon">🤝</span>
-            <div class="notice-text-content">
+            <div class="notice-item-header">
+              <span class="notice-pin-icon">🤝</span>
               <span class="notice-tag">바른 생활</span>
-              <div class="notice-main-text">매너있게 말하고 행동하기</div>
+            </div>
+            <div class="notice-body">
+              <div class="notice-line">매너있게 말하고 행동하기</div>
             </div>
           </div>
         </div>

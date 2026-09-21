@@ -316,23 +316,23 @@ body {
   justify-content: space-between;
   height: 100%;
   min-height: 0;
-  /* 초등학교 3학년 맞춤형 화사하고 컬러풀한 파스텔 배경 */
-  background: linear-gradient(165deg, #FFF0F7 0%, #F5EFFF 35%, #E6F4FE 70%, #FFF8EE 100%);
-  border: 2.5px solid var(--c-lavender-border);
+  /* 싱그럽고 따뜻한 잔디밭 & 초원 파스텔 그라데이션 */
+  background: linear-gradient(165deg, #F0FDF4 0%, #DCFCE7 32%, #BBF7D0 68%, #ECFCCB 100%);
+  border: 2.5px solid #86EFAC;
   position: relative;
-  box-shadow: 0 14px 36px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 14px 36px rgba(34, 197, 94, 0.14);
   overflow: hidden;
 }
 
-/* 🎨 초3 맞춤 컬러풀 패턴 배경 (사이즈 50% 확대: 105px) */
+/* 🌿 잔디밭 & 들꽃 & 클로버 컬러풀 패턴 배경 (사이즈 50% 확대: 105px 유지) */
 .timer-colorful-pattern {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%23F472B6' opacity='0.45'/%3E%3Ccircle cx='48' cy='20' r='4' fill='%2338BDF8' opacity='0.45'/%3E%3Ccircle cx='62' cy='58' r='3.5' fill='%2334D399' opacity='0.5'/%3E%3Ccircle cx='18' cy='52' r='4.5' fill='%23FBBF24' opacity='0.45'/%3E%3Cpath d='M35 6l2 4.5 4.5 2-4.5 2-2 4.5-2-4.5-4.5-2 4.5-2z' fill='%23A78BFA' opacity='0.5'/%3E%3Cpath d='M58 35l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z' fill='%23FB7185' opacity='0.45'/%3E%3Cpath d='M12 30l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5z' fill='%2360A5FA' opacity='0.45'/%3E%3Ccircle cx='35' cy='60' r='4' stroke='%23C084FC' stroke-width='2' opacity='0.4'/%3E%3Ccircle cx='64' cy='10' r='3.5' stroke='%23FB923C' stroke-width='2' opacity='0.4'/%3E%3Cpath d='M20 14q3 3 6 0t6 0' stroke='%23F472B6' stroke-width='2' stroke-linecap='round' opacity='0.45'/%3E%3Cpath d='M44 48q3 3 6 0t6 0' stroke='%2334D399' stroke-width='2' stroke-linecap='round' opacity='0.45'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M10 28 Q13 14 16 8 Q18 15 20 28' fill='%2322C55E' opacity='0.45'/%3E%3Cpath d='M46 62 Q49 48 52 42 Q54 49 56 62' fill='%2316A34A' opacity='0.45'/%3E%3Cg opacity='0.55' fill='%2315803D'%3E%3Ccircle cx='48' cy='18' r='3.2'/%3E%3Ccircle cx='54' cy='18' r='3.2'/%3E%3Ccircle cx='51' cy='15' r='3.2'/%3E%3Ccircle cx='51' cy='21' r='3.2'/%3E%3Cpath d='M51 21 Q53 27 50 29' stroke='%2315803D' stroke-width='1.2' fill='none'/%3E%3C/g%3E%3Cg opacity='0.6'%3E%3Ccircle cx='20' cy='52' r='2.2' fill='%23FBBF24'/%3E%3Ccircle cx='20' cy='48' r='1.8' fill='%23FFFFFF'/%3E%3Ccircle cx='20' cy='56' r='1.8' fill='%23FFFFFF'/%3E%3Ccircle cx='16' cy='52' r='1.8' fill='%23FFFFFF'/%3E%3Ccircle cx='24' cy='52' r='1.8' fill='%23FFFFFF'/%3E%3C/g%3E%3Ccircle cx='36' cy='8' r='3' fill='%23F472B6' opacity='0.45'/%3E%3Ccircle cx='62' cy='42' r='2.8' fill='%23FB923C' opacity='0.45'/%3E%3Ccircle cx='8' cy='40' r='2.5' fill='%23FDE047' opacity='0.55'/%3E%3Ccircle cx='34' cy='40' r='2.2' fill='%2338BDF8' opacity='0.45'/%3E%3Cpath d='M28 60 Q34 52 38 60 Q31 63 28 60' fill='%234ADE80' opacity='0.5'/%3E%3Ccircle cx='62' cy='12' r='3.5' fill='%23EF4444' opacity='0.5'/%3E%3Ccircle cx='62' cy='10.5' r='1.5' fill='%231E293B' opacity='0.6'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 105px 105px;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .timer-visual-wrapper {
@@ -348,7 +348,7 @@ body {
   z-index: 2;
 }
 
-/* ================= 🌈 타이머 원 뒷배경 초3 테마 꾸미기 ================= */
+/* ================= 🌿 타이머 원 뒷배경 싱그러운 잔디밭 테마 꾸미기 ================= */
 .timer-backdrop-scene {
   position: absolute;
   inset: 0;
@@ -362,13 +362,13 @@ body {
   justify-content: center;
 }
 
-/* 1) 부드러운 오로라 후광 (20% 확대) */
+/* 1) 따스한 햇살 & 잔디빛 오로라 후광 */
 .scene-glow-aura {
   position: absolute;
   width: 306px;
   height: 306px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(196, 181, 253, 0.5) 0%, rgba(186, 230, 253, 0.4) 50%, rgba(254, 205, 211, 0.2) 75%, transparent 100%);
+  background: radial-gradient(circle, rgba(254, 240, 138, 0.48) 0%, rgba(187, 247, 208, 0.42) 50%, rgba(134, 239, 172, 0.22) 75%, transparent 100%);
   filter: blur(14px);
   animation: auraPulse 4s infinite ease-in-out alternate;
 }
@@ -378,41 +378,27 @@ body {
   100% { transform: scale(1.08); opacity: 0.95; }
 }
 
-/* 2) 몽실몽실 푹신한 파스텔 구름들 */
+/* 2) 몽실몽실 푹신한 파스텔 하늘 구름 */
 .scene-cloud {
   position: absolute;
   font-size: 2.2rem;
-  filter: drop-shadow(0 4px 10px rgba(139, 92, 246, 0.2));
+  filter: drop-shadow(0 4px 10px rgba(16, 185, 129, 0.18));
   opacity: 0.92;
   animation: cloudFloat 4.5s ease-in-out infinite alternate;
 }
 
 .cloud-left {
   top: 38px;
-  left: 12px;
+  left: 14px;
   animation-delay: 0s;
   font-size: 2.4rem;
 }
 
 .cloud-right {
   top: 42px;
-  right: 14px;
+  right: 16px;
   animation-delay: 1.8s;
   font-size: 2.3rem;
-}
-
-.cloud-bottom-left {
-  bottom: 22px;
-  left: 20px;
-  animation-delay: 1.2s;
-  font-size: 2.0rem;
-}
-
-.cloud-bottom-right {
-  bottom: 25px;
-  right: 22px;
-  animation-delay: 2.5s;
-  font-size: 2.1rem;
 }
 
 @keyframes cloudFloat {
@@ -420,53 +406,78 @@ body {
   100% { transform: translateY(-7px) rotate(4deg); }
 }
 
-/* 4) 반짝이는 별과 행성/풍선 */
-.scene-star {
+/* 3) 잔디밭 자연 오브젝트 (클로버, 데이지, 튤립, 나비, 무당벌레, 새싹) */
+.scene-nature {
   position: absolute;
-  animation: starTwinkle 2.5s infinite ease-in-out alternate;
-  filter: drop-shadow(0 2px 6px rgba(251, 191, 36, 0.5));
+  filter: drop-shadow(0 3px 6px rgba(22, 101, 52, 0.2));
+  user-select: none;
 }
 
-.star-1 { top: 12px; left: 62px; font-size: 1.6rem; animation-delay: 0.3s; }
-.star-2 { top: 18px; right: 58px; font-size: 1.4rem; animation-delay: 1.2s; color: #FBBF24; }
-.star-3 { bottom: 35px; left: 85px; font-size: 1.3rem; animation-delay: 0.8s; }
-.star-4 { bottom: 40px; right: 80px; font-size: 1.5rem; animation-delay: 2.0s; }
-
-.scene-planet {
-  position: absolute;
-  top: 10px;
-  right: 26px;
-  font-size: 1.5rem;
-  animation: floatSlow 5s ease-in-out infinite alternate;
+.nature-clover {
+  top: 14px;
+  left: 56px;
+  font-size: 1.7rem;
+  animation: floatNature 3.5s ease-in-out infinite alternate;
 }
 
-.scene-balloon {
-  position: absolute;
-  bottom: 28px;
-  left: 12px;
+.nature-daisy {
+  top: 16px;
+  right: 54px;
   font-size: 1.6rem;
-  animation: floatSlow 4s ease-in-out infinite alternate;
+  animation: floatNature 3.8s ease-in-out infinite alternate;
+  animation-delay: 1.2s;
+}
+
+.nature-butterfly {
+  top: 90px;
+  right: 8px;
+  font-size: 1.65rem;
+  animation: butterflyFlutter 3s ease-in-out infinite alternate;
+}
+
+.nature-tulip {
+  bottom: 30px;
+  left: 18px;
+  font-size: 1.6rem;
+  animation: floatNature 4.2s ease-in-out infinite alternate;
+  animation-delay: 0.7s;
+}
+
+.nature-ladybug {
+  bottom: 26px;
+  right: 22px;
+  font-size: 1.5rem;
+  animation: floatNature 4.5s ease-in-out infinite alternate;
+  animation-delay: 2.1s;
+}
+
+.nature-sprout {
+  bottom: 12px;
+  left: 68px;
+  font-size: 1.5rem;
+  animation: floatNature 3.2s ease-in-out infinite alternate;
   animation-delay: 1.5s;
 }
 
-@keyframes starTwinkle {
-  0% { transform: scale(0.8) rotate(0deg); opacity: 0.5; }
-  100% { transform: scale(1.25) rotate(20deg); opacity: 1; }
+@keyframes floatNature {
+  0% { transform: translateY(0) rotate(-4deg) scale(0.95); }
+  100% { transform: translateY(-7px) rotate(6deg) scale(1.08); }
 }
 
-@keyframes floatSlow {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
+@keyframes butterflyFlutter {
+  0% { transform: translate(0, 0) rotate(-8deg) scaleX(0.9); }
+  50% { transform: translate(-4px, -6px) rotate(6deg) scaleX(1.1); }
+  100% { transform: translate(-2px, -10px) rotate(-4deg) scaleX(0.9); }
 }
 
-/* 반짝이 별빛 도트 */
+/* 반짝이는 햇살 이슬 도트 */
 .scene-sparkle-dot {
   position: absolute;
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: #FFF;
-  box-shadow: 0 0 8px 2px #A78BFA;
+  box-shadow: 0 0 8px 2px #4ADE80;
   animation: dotGlow 2s infinite ease-in-out alternate;
 }
 .dot-1 { top: 75px; left: 45px; animation-delay: 0.2s; }
@@ -709,10 +720,10 @@ body {
   transition: all 0.3s ease;
 }
 
-/* 1. 학급 알림판 (미디어 있을 때: 콤팩트 핏) */
+/* 1. 학급 알림판 (3개 세로 카드 나란히 배치) */
 .notice-card {
   flex: 0 0 auto;
-  height: 155px;
+  height: 168px;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -722,36 +733,52 @@ body {
 .notice-list {
   flex: 1 1 auto;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
   overflow: hidden;
 }
 
 .notice-item {
-  flex: 1 1 0;
-  min-height: 0;
-  border-radius: 14px;
-  padding: 6px 14px;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  border-left: 6px solid;
-  transition: all 0.3s ease;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  border-radius: 14px;
+  padding: 8px 12px;
+  border-top: 4.5px solid;
+  border-left: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.notice-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 .notice-item:nth-child(1) {
   background: var(--c-lavender-light);
-  border-left-color: var(--c-lavender);
+  border-top-color: var(--c-lavender);
 }
 .notice-item:nth-child(2) {
   background: var(--c-sky-light);
-  border-left-color: var(--c-sky);
+  border-top-color: var(--c-sky);
 }
 .notice-item:nth-child(3) {
   background: var(--c-indigo-light);
-  border-left-color: var(--c-indigo);
+  border-top-color: var(--c-indigo);
+}
+
+.notice-item-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  padding-bottom: 5px;
+  border-bottom: 1.5px dashed rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
 }
 
 .notice-pin-icon {
@@ -759,37 +786,52 @@ body {
   flex-shrink: 0;
 }
 
-.notice-text-content {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .notice-tag {
   display: inline-block;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
+  font-weight: 800;
   padding: 2px 8px;
   border-radius: 8px;
   white-space: nowrap;
-  background: rgba(255, 255, 255, 0.92);
-  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .notice-item:nth-child(1) .notice-tag { color: var(--c-lavender-dark); }
 .notice-item:nth-child(2) .notice-tag { color: var(--c-sky); }
 .notice-item:nth-child(3) .notice-tag { color: var(--c-indigo); }
 
-.notice-main-text {
-  font-size: 1.05rem;
-  color: var(--text-main);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.notice-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
+  overflow-y: auto;
 }
 
-/* 미디어가 없을 때 알림판이 전체 확장되며 글자가 큼직해지고 여백이 채워지는 스타일 */
+.notice-line {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  word-break: keep-all;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.notice-line::before {
+  content: "•";
+  color: currentColor;
+  opacity: 0.6;
+  font-weight: 900;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+/* 2. 미디어가 없을 때 알림판이 전체 확장되며 대형 세로 카드로 풍성해지는 스타일 */
 .right-column.no-media .media-card {
   display: none !important;
 }
@@ -797,7 +839,7 @@ body {
 .right-column.no-media .notice-card {
   flex: 1 1 auto;
   height: 100%;
-  padding: 20px 28px;
+  padding: 20px 24px;
 }
 
 .right-column.no-media .cute-card-header {
@@ -810,42 +852,44 @@ body {
 }
 
 .right-column.no-media .notice-list {
-  justify-content: space-between;
   gap: 16px;
   flex: 1 1 auto;
 }
 
 .right-column.no-media .notice-item {
-  padding: 16px 24px;
+  padding: 20px 18px;
   border-radius: 20px;
-  border-left-width: 8px;
-  gap: 18px;
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.05);
+  border-top-width: 6.5px;
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.08);
+}
+
+.right-column.no-media .notice-item-header {
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
 }
 
 .right-column.no-media .notice-pin-icon {
-  font-size: 2.2rem;
-}
-
-.right-column.no-media .notice-text-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 6px;
+  font-size: 1.8rem;
 }
 
 .right-column.no-media .notice-tag {
-  font-size: 1.05rem;
-  padding: 3px 14px;
-  border-radius: 10px;
+  font-size: 1.2rem;
+  padding: 4px 14px;
+  border-radius: 12px;
 }
 
-.right-column.no-media .notice-main-text {
-  font-size: clamp(1.45rem, 2.7vh, 1.95rem);
-  line-height: 1.35;
-  white-space: normal;
-  word-break: keep-all;
+.right-column.no-media .notice-body {
+  gap: 10px;
+}
+
+.right-column.no-media .notice-line {
+  font-size: clamp(1.25rem, 2.4vh, 1.7rem);
+  line-height: 1.45;
+}
+
+.right-column.no-media .notice-line::before {
+  font-size: 1.4rem;
 }
 
 /* 2. 대형 교실 미디어 뷰어 카드 (미디어 있을 때) */
